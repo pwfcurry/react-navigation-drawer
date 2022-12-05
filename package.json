@@ -1,26 +1,21 @@
 {
-  "name": "react-navigation-drawer",
-  "version": "2.3.4",
+  "name": "@pwfcurry/react-navigation-drawer",
+  "version": "3.0.7",
   "description": "Drawer navigator component for React Navigation",
-  "main": "lib/commonjs/index.js",
-  "react-native": "lib/module/index.js",
-  "module": "lib/module/index.js",
-  "types": "lib/typescript/src/index.d.ts",
+  "main": "dist/index",
+  "types": "dist/index",
   "files": [
     "src",
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "test": "jest",
-    "lint": "eslint --ext .js,.ts,.tsx .",
-    "typescript": "tsc --noEmit",
-    "example": "yarn --cwd example",
-    "bootstrap": "yarn example && yarn",
-    "prepare": "bob build",
-    "release": "release-it"
+    "prepublishOnly": "npm run compile",
+    "compile": "npm run clean && tsc -p .",
+    "clean": "rm -rf dist"
   },
+  "sideEffects": false,
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "react-native-component",
@@ -33,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-navigation/drawer.git"
+    "url": "git+https://github.com/pwfcurry/react-navigation-drawer.git"
   },
   "author": "",
   "license": "MIT",
@@ -45,7 +40,6 @@
     "@babel/core": "^7.4.3",
     "@commitlint/config-conventional": "^7.5.0",
     "@expo/vector-icons": "^10.0.1",
-    "@react-native-community/bob": "^0.3.4",
     "@release-it/conventional-changelog": "^1.1.0",
     "@types/jest": "^24.0.11",
     "@types/react": "^16.8.13",
@@ -81,44 +75,5 @@
     "react-native-reanimated": "^1.0.0",
     "react-native-screens": "^1.0.0 || ^1.0.0-alpha",
     "react-navigation": "^4.0.7"
-  },
-  "jest": {
-    "preset": "react-native",
-    "setupFiles": [
-      "<rootDir>/jest-setup.js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "jest-setup.js"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/example/"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-navigation|@react-navigation/core|@react-navigation/native)"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/lib/"
-    ],
-    "testRegex": "/__tests__/.*\\.(test|spec)\\.(js|tsx?)$",
-    "testEnvironment": "node",
-    "transform": {
-      "^.+\\.(js|ts|tsx)$": "babel-jest"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint && yarn typescript && yarn test",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "@react-native-community/bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs",
-      "module",
-      "typescript"
-    ]
   }
 }
